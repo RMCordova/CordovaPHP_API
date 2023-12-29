@@ -21,8 +21,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('api')->group(function () {
     Route::get('cordova', [ApiController::class, 'index']);
+    Route::get('cordova/{id}', [ApiController::class, 'show']); 
     Route::post('cordova', [ApiController::class, 'store']);
     Route::put('cordova/{id}', [ApiController::class, 'update']);
     Route::delete('cordova/{id}', [ApiController::class, 'destroy']);
 });
+
 

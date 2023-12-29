@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ApiController extends Controller
 {
+    //-------------------------------------------- get all data
     public function index()
     {
         try {
@@ -34,6 +35,19 @@ class ApiController extends Controller
         }
     }
 
+    //-------------------------------------------- get data by id
+    public function show($id)
+    {
+        $record = Post::find($id);
+
+        if (!$record) {
+            return response()->json(['error' => 'Record not found'], 404);
+        }
+
+        return response()->json($record);
+    }
+
+    //-------------------------------------------- post data
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -73,6 +87,7 @@ class ApiController extends Controller
         }
     }   
 
+    //-------------------------------------------- update data by id
     public function update(Request $request, $id)
     {
         $employee = Post::find($id);
@@ -110,6 +125,7 @@ class ApiController extends Controller
         ], 200);
     }
 
+    //-------------------------------------------- delete data by id
     public function destroy($id)
     {
         $employee = Post::find($id);
